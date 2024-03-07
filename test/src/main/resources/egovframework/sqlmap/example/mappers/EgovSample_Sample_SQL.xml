@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.example.sample.service.impl.SampleMapper">
+
+	<resultMap id="board" type="egovframework.example.sample.service.SampleVO">
+		<result property="num" column="bbrd_lst"/>
+		<result property="title" column="bbrd_ttl"/>
+		<result property="contents" column="bbrd_cntns"/>
+		<result property="writer" column="bbrd_wrter"/>
+		<result property="password" column="bbrd_pwd"/>
+		<result property="view" column="bbrd_vew"/>
+		<result property="date" column="bbrd_wr_date"/>
+		<result property="yn" column="bbrd_yn"/>
+	</resultMap>
+	
+	<select id="selectList" parameterType="searchVO" resultType="egovMap">
+    SELECT 
+        BBRD_LST, BBRD_TTL, BBRD_CNTNS, BBRD_WRTER, BBRD_PWD, BBRD_VEW, BBRD_WR_DATE, BBRD_YN
+    FROM BBRD
+    <if test="searchKeyword != null and searchKeyword != ''">
+        WHERE
+        <choose>
+            <when test="searchCondition == 0">
+                BBRD_WRTER LIKE '%' || #{searchKeyword} || '%'
+            </when>
+            <when test="searchCondition == 1">
+                BBRD_CNTNS LIKE '%' || #{searchKeyword} || '%'
+            </when>
+            <when test="searchCondition == 2">
+                BBRD_TTL LIKE '%' || #{searchKeyword} || '%'
+            </when>
+        </choose>
+    	</if>
+    	ORDER BY BBRD_LST DESC
+    	OFFSET #{firstIndex} ROWS FETCH NEXT #{recordCountPerPage} ROWS ONLY
+	</select>
+
+	<select id="selectCount" parameterType="searchVO" resultType="int">
+
+			SELECT COUNT(*)
+			FROM BBRD
+			WHERE 1=1
+			<if test="searchKeyword != null and searchKeyword != ''">
+		        <choose>
+		            <when test="searchCondition == 0">
+						AND BBRD_WRTER LIKE '%' || #{searchKeyword} || '%'
+					</when>
+		            <when test="searchCondition == 1">
+						AND	BBRD_CNTNS LIKE '%' || #{searchKeyword} || '%'
+					</when>
+					<when test="searchCondition == 2">
+						AND	BBRD_TTL LIKE '%' || #{searchKeyword} || '%'
+					</when>
+				</choose>
+			</if>
+	</select>
+
+</mapper>

@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+body,
+#wrapper,
+#page-content-wrapper,
+.container,
+.table,
+thead,
+tr,
+th,
+td,
+table {
+	background-color: #DBE2EF !important;
+}
+
+.write, .List, .ViewButton {
+	background-color: #3F72AF;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 1.2em;
+	border-radius: 10px;
+	width: 5em;
+	height: 1.8em;
+	border: none;
+}
+
+.searchB {
+	background-color: #3F72AF;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 1em;
+	border-radius: 10px;
+	width: 6.5em;
+	height: 1.8em;
+	border: none;
+}
+
+#UND_DV {
+    margin-top: 5em;    /* 네비게이션바와 상하 간격 조정 */
+}
+
+#logo2Img {
+	max-width: 90%; /* 이미지의 최대 너비를 부모 요소인 mainDiv에 맞게 설정합니다. */
+	max-height: 90%; /* 이미지의 최대 높이도 부모 요소에 맞게 설정합니다. */
+	position: relative; /* 위치를 조정하기 위해 position을 설정합니다. */
+}
+
+#mainDiv {
+	width: 100%; /* 화면 전체 너비를 사용합니다. */
+	height: 20em;
+	background: #3F72AF;
+	display: flex;
+	justify-content: center; /* 내부 요소를 가운데 정렬합니다. */
+	align-items: center; /* 내부 요소를 가운데 정렬합니다. */
+	margin: 0;
+	padding: 0;
+}
+
+.mainBtn {
+	width: 15em;
+	height: 15em;
+	border-radius: 50%; /* 반지름 값을 버튼 크기에 따라 조절하세요 */
+	background-color: #fff; /* 버튼 배경색 */
+	color: #000;
+	border: none;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	margin: 3.5em 21.5em 0.5em 21.5em;
+}
+
+.mainBtn:hover {
+	box-shadow: 5px 5px 20px #B1CBE1;
+	font-weight: bold;
+}
+
+#btnDiv {
+	width: 100%;
+	float: left;
+	justify-content: space-between;
+	margin-top: 8em;
+	text-align: center; /* 버튼을 가운데 정렬합니다. */
+}
+
+.navbar{
+    	position: fixed;
+    	width: 100%;
+    	background-color: #DBE2EF;
+}
+
+.goWr{ /* 글쓰기 버튼 */
+	padding-right: 3em; 
+	padding-bottom: 4em;	
+}
