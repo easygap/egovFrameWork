@@ -46,7 +46,7 @@ public interface SampleMapper {
 	 * @return 등록 결과
 	 * @exception Exception
 	 */
-	void insertSample(SampleVO vo) throws Exception;
+	void insertBoard (SampleVO vo) throws Exception;
 
 	/**
 	 * 글을 수정한다.

@@ -26,21 +26,7 @@
     <title><spring:message code="title.sample" /></title>
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/styles.css'/>"/>
     <script type="text/javaScript" language="javascript" defer="defer">
-        <!--
-        /* 글 수정 화면 function */
-        function fn_egov_select(id) {
-        	document.listForm.selectedId.value = id;
-           	document.listForm.action = "<c:url value='/updateSampleView.do'/>";
-           	document.listForm.submit();
-        }
-        
-        /* 글 목록 화면 function */
-        function fn_egov_selectList() {
-        	document.listForm.action = "<c:url value='/egovSampleList.do'/>";
-           	document.listForm.submit();
-        }
-        -->
-        
+    
         /* 글 등록 화면 function */
         function fn_egov_addView() {
            	document.listForm.action = "<c:url value='/boardWrite.do'/>";
@@ -99,7 +85,7 @@
         		</table>
         	</div>
         	<div align="right" class="goWr">
-        		<button type="button" class="write" onclick="location.href='Board_write.jsp';">글 쓰 기</button>
+        		<button type="button" class="write" onclick="location.href='/test/board/boardWrite.do';">글 쓰 기</button>
         	</div>
         	<!-- /List -->
         	<div id="paging" align="center">

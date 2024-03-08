@@ -7,14 +7,8 @@
 
     <formset>
         <form name="sampleVO">
-        	<field property="name" depends="required">
-        		<arg0 key="title.sample.name" />
-			</field>
-			<field property="description" depends="required">
-                <arg0 key="title.sample.description" />
-            </field>
-        	<field property="regUser" depends="required">
-        		<arg0 key="title.sample.regUser" />
+        	<field property="num" depends="required">
+        		<arg0 key="title.sample.num" />
 			</field>
         </form>
     </formset>

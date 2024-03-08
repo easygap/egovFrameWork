@@ -30,9 +30,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 /**
@@ -107,7 +109,34 @@ public class EgovSampleController {
 	}
 	
 	/**
-	 * 글 등록 화면을 조회한다.
+	 * 글을 등록한다.
+	 * @param sampleVO - 등록할 정보가 담긴 VO
+	 * @param searchVO - 목록 조회조건 정보가 담긴 VO
+	 * @param status
+	 * @return "forward:/egovSampleList.do"
+	 * @exception Exception
+	 */
+	@RequestMapping(value = "/board/boardWrite.do", method = RequestMethod.POST)
+	public String insertBoard(@ModelAttribute("sampleVO") SampleVO sampleVO, BindingResult bindingResult, Model model, SessionStatus status)
+			throws Exception {
+		
+		LOGGER.debug("*****	Title : " + sampleVO.getTitle() + " Writer : " + sampleVO.getWriter() + " Contents : " + sampleVO.getContents() + " Date : " + sampleVO.getDate());
+
+		// Server-Side Validation
+		beanValidator.validate(sampleVO, bindingResult);	
+
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("sampleVO", sampleVO);
+			return "/board/boardWriter";
+		}
+
+		sampleService.insertBoard(sampleVO);
+		status.setComplete();    // submit 중복 방지
+		return "forward:/board/boardList.do";
+	}
+	
+	/**
+	 * 글 등록 화면을 조회한다.  
 	 * @param searchVO - 목록 조회조건 정보가 담긴 VO
 	 * @param model
 	 * @return "egovSampleRegister"
@@ -120,3 +149,4 @@ public class EgovSampleController {
 	}
 
 }
+ 

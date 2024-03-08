@@ -54,5 +54,21 @@
 				</choose>
 			</if>
 	</select>
+	
+	<insert id="insertBoard" parameterType="SampleVO">
+			INSERT INTO BBRD
+				( BBRD_LST
+				  , BBRD_WRTER
+				  , BBRD_TTL
+				  , BBRD_CNTNS
+				  , BBRD_PWD
+				  , BBRD_WR_DATE )
+			VALUES ( BBRD_SEQ.NEXTVAL
+				  , #{writer}
+				  , #{title}
+				  , #{contents}
+				  , #{password}
+				  , SYSDATE )
+	</insert>
 
 </mapper>

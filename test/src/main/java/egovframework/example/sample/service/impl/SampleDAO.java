@@ -50,7 +50,7 @@ public class SampleDAO extends EgovAbstractMapper {
 	 * @return 등록 결과
 	 * @exception Exception
 	 */
-	public int insertSample(SampleVO vo) throws Exception {
+	public int insertBoard(SampleVO vo) throws Exception {
 		return insert("sampleDAO.insertSample", vo);
 	}
 

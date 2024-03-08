@@ -58,6 +58,9 @@ public class SampleVO extends SampleDefaultVO {
 	
 	/** 사용여부 */
 	private char yn;
+	
+	/** 첨부파일 */
+	private String file;
 
 	public int getNum() {
 		return num;
@@ -123,4 +126,12 @@ public class SampleVO extends SampleDefaultVO {
 		this.yn = yn;
 	}
 
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
+	
 }

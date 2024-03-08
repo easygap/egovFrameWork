@@ -19,6 +19,7 @@ import java.util.List;
 
 import egovframework.example.sample.service.EgovSampleService;
 import egovframework.example.sample.service.SampleDefaultVO;
+import egovframework.example.sample.service.SampleVO;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import egovframework.rte.fdl.idgnr.EgovIdGnrService;
 
@@ -74,6 +75,17 @@ public class EgovSampleServiceImpl extends EgovAbstractServiceImpl implements Eg
 	}
 
 	/**
+	 * 글을 등록한다.
+	 * @param vo - 등록할 정보가 담긴 SampleVO
+	 * @return 등록 결과
+	 * @exception Exception
+	 */
+	@Override
+	public void insertBoard(SampleVO vo) throws Exception {
+		sampleDAO.insertBoard(vo);
+	}
+	
+	/**  
 	 * 글 총 갯수를 조회한다.
 	 * @param searchVO - 조회할 정보가 담긴 VO
 	 * @return 글 총 갯수
