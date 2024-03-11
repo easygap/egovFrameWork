@@ -21,7 +21,6 @@ import egovframework.example.sample.service.EgovSampleService;
 import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.example.sample.service.SampleVO;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
-import egovframework.rte.fdl.idgnr.EgovIdGnrService;
 
 import javax.annotation.Resource;
 
@@ -51,18 +50,10 @@ public class EgovSampleServiceImpl extends EgovAbstractServiceImpl implements Eg
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EgovSampleServiceImpl.class);
 
-	/** SampleDAO */
-	// TODO ibatis 사용
-	//@Resource(name = "sampleD AO")
-	//private SampleDAO sampleDAO;
 	 /** TODO mybatis 사용 */
 	@Resource(name="sampleMapper")
 	private SampleMapper sampleDAO;
-
-	/** ID Generation */
-	@Resource(name = "egovIdGnrService")
-	private EgovIdGnrService egovIdGnrService;
-
+	
 	/**
 	 * 글 목록을 조회한다.
 	 * @param searchVO - 조회할 정보가 담긴 VO
@@ -82,18 +73,62 @@ public class EgovSampleServiceImpl extends EgovAbstractServiceImpl implements Eg
 	 */
 	@Override
 	public void insertBoard(SampleVO vo) throws Exception {
+		//SHA-256암호화
+		Encryption encryption = new Encryption();
+		vo.setPassword(encryption.encrypt(vo.getPassword()));
 		sampleDAO.insertBoard(vo);
 	}
 	
-	/**  
+	/**
+	 * @throws Exception   
 	 * 글 총 갯수를 조회한다.
 	 * @param searchVO - 조회할 정보가 담긴 VO
 	 * @return 글 총 갯수
-	 * @exception
+	 * @exception Exception
 	 */
 	@Override
-	public int selectCount(SampleDefaultVO searchVO) {
+	public int selectCount(SampleDefaultVO searchVO) throws Exception {
 		return sampleDAO.selectCount(searchVO);
+	}
+
+	/**
+	 * 글을 조회한다.
+	 * @param vo - 조회할 정보가 담긴 SampleVO
+	 * @return 조회한 글
+	 * @exception Exception
+	 */
+	@Override
+	public SampleVO boardView(SampleVO vo) throws Exception {
+		SampleVO resultVO = sampleDAO.boardView(vo);
+		if (resultVO == null)
+			//message-common.properties 설정
+			throw processException("info.nodata.msg");
+		return resultVO;
+	}
+
+	/**
+	 * 조회한 글의 조회수 +1.
+	 * @param vo - 조회할 정보가 담긴 SampleVO
+	 * @return 조회한 글
+	 * @exception Exception
+	 */
+	@Override
+	public void increaseView(int lst) throws Exception {
+		sampleDAO.increaseView(lst);
+	}
+
+	/**
+	 * 글의 비밀번호 검증.
+	 * @param vo - 조회할 정보가 담긴 SampleVO
+	 * @return 비밀번호 비교 결과
+	 * @exception Exception
+	 */
+	@Override
+	public int checkPassword(SampleVO vo) throws Exception {
+		//SHA-256암호화
+		Encryption encryption = new Encryption();
+		vo.setPassword(encryption.encrypt(vo.getPassword()));
+		return sampleDAO.checkPassword(vo);
 	}
 
 }

@@ -70,5 +70,25 @@
 				  , #{password}
 				  , SYSDATE )
 	</insert>
+	
+	<select id="boardView" resultMap="board">
+			SELECT
+				BBRD_LST, BBRD_WRTER, BBRD_TTL, BBRD_CNTNS, BBRD_PWD
+			FROM BBRD
+			WHERE BBRD_LST=#{num}
+	</select>
+	
+	<update id="increaseView">
+			UPDATE BBRD
+			SET BBRD_VEW = BBRD_VEW + 1
+			WHERE BBRD_LST=#{lst}
+	</update>
+	
+	<select id="checkPassword" resultMap="board">
+			SELECT COUNT(*)
+			FROM BBRD
+			WHERE BBRD_LST = #{num} AND
+				  BBRD_PWD = #{password}
+	</select>
 
 </mapper>

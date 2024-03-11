@@ -15,6 +15,7 @@
  */
 package egovframework.example.sample.web;
 
+import java.io.IOException;
 import java.util.List;
 
 import egovframework.example.sample.service.EgovSampleService;
@@ -23,7 +24,8 @@ import egovframework.example.sample.service.SampleVO;
 import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
-import javax.annotation.Resource; 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +36,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
@@ -75,7 +78,7 @@ public class EgovSampleController {
 	 * 글 목록을 조회한다. (pageing)
 	 * @param searchVO - 조회할 정보가 담긴 SampleDefaultVO
 	 * @param model
-	 * @return "egovSampleList"
+	 * @return "board/boardList"
 	 * @exception Exception
 	 */
 	@RequestMapping(value = "/board/boardList.do")
@@ -111,9 +114,8 @@ public class EgovSampleController {
 	/**
 	 * 글을 등록한다.
 	 * @param sampleVO - 등록할 정보가 담긴 VO
-	 * @param searchVO - 목록 조회조건 정보가 담긴 VO
 	 * @param status
-	 * @return "forward:/egovSampleList.do"
+	 * @return "forward:/board/boardList.do"
 	 * @exception Exception
 	 */
 	@RequestMapping(value = "/board/boardWrite.do", method = RequestMethod.POST)
@@ -139,7 +141,7 @@ public class EgovSampleController {
 	 * 글 등록 화면을 조회한다.  
 	 * @param searchVO - 목록 조회조건 정보가 담긴 VO
 	 * @param model
-	 * @return "egovSampleRegister"
+	 * @return "board/boardWrite"
 	 * @exception Exception
 	 */
 	@RequestMapping(value = "/board/boardWrite.do", method = RequestMethod.GET)
@@ -148,5 +150,41 @@ public class EgovSampleController {
 		return "board/boardWrite";
 	}
 
+	/**
+	 * 글 상세보기 화면을 조회한다.  
+	 * @param lst - 게시글 번호 정보가 담긴 파라미터 값
+	 * @param model
+	 * @return "/board/boardView"
+	 * @exception Exception
+	 */
+	@RequestMapping(value = "/board/boardView.do", method = RequestMethod.POST)
+	public String selectView(@RequestParam("selectedId") int lst, SampleVO sampleVO, Model model) throws Exception {
+		
+		sampleVO.setNum(lst);
+		
+		model.addAttribute("sampleVO", sampleService.boardView(sampleVO));
+		sampleService.increaseView(lst);
+		
+		return "/board/boardView";
+	}
+	
+	/**
+	 * 비밀번호 일치 여부를 체크한다.  
+	 * @param lst - 게시글 번호 정보가 담긴 파라미터 값
+	 * @param model
+	 * @return "/board/boardView"
+	 * @exception Exception
+	 */
+	@RequestMapping(value = "/board/checkPassword.do", method = RequestMethod.POST)
+	public void checkPassword(@RequestParam("num") int num, @RequestParam("password") String password, HttpServletResponse resp, SampleVO sampleVO) throws Exception {
+	    LOGGER.debug("num : " + num + ", password : " + password);
+	    sampleVO.setNum(num);
+	    sampleVO.setPassword(password);
+	    
+	    int vo = sampleService.checkPassword(sampleVO);
+	    
+	    LOGGER.debug("**VO의 값은? : " + vo + "**");
+	    
+	    resp.getWriter().print(vo);
+	}
 }
- 

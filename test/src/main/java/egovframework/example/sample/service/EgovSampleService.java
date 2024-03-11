@@ -49,7 +49,7 @@ public interface EgovSampleService {
 	 * @return 글 총 갯수
 	 * @exception
 	 */
-	int selectCount(SampleDefaultVO searchVO);
+	int selectCount(SampleDefaultVO searchVO) throws Exception;
 
 	/**
 	 * 글을 등록한다.
@@ -59,4 +59,27 @@ public interface EgovSampleService {
 	 */
 	void insertBoard(SampleVO vo) throws Exception;
 
+	/**
+	 * 글을 조회한다.
+	 * @param vo - 조회할 정보가 담긴 SampleVO
+	 * @return 조회한 글
+	 * @exception Exception
+	 */
+	SampleVO boardView(SampleVO vo) throws Exception;
+	
+	/**
+	 * 조회한 글의 조회수 +1.
+	 * @param lst - 게시글의 번호
+	 * @return 조회수 증가 결과
+	 * @exception Exception
+	 */
+	void increaseView(int lst) throws Exception;
+	
+	/**
+	 * 글의 비밀번호 검증.
+	 * @param vo - 조회할 정보가 담긴 SampleVO
+	 * @return 비밀번호 비교 결과
+	 * @exception Exception
+	 */
+	int checkPassword(SampleVO vo) throws Exception;
 }

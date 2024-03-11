@@ -27,6 +27,14 @@
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/styles.css'/>"/>
     <script type="text/javaScript" language="javascript" defer="defer">
     
+    	/* 글 상세보기 화면 function */
+    	function fn_egov_select(bbrdLst) {
+    		document.listForm.selectedId.value = bbrdLst;
+    		console.log(bbrdLst);
+    		document.listForm.action = "<c:url value='/board/boardView.do'/>";
+           	document.listForm.submit();
+    	}
+    
         /* 글 등록 화면 function */
         function fn_egov_addView() {
            	document.listForm.action = "<c:url value='/boardWrite.do'/>";
@@ -76,7 +84,7 @@
             			<tr>
             				<td align="left" class="listtd"><c:out value="${paginationInfo.totalRecordCount+1 - ((searchVO.pageIndex-1) * searchVO.pageSize + status.count)}"/></td>
             				<td align="left" class="listtd"><c:out value="${result.bbrdWrter}"/>&nbsp;</td>
-            				<td align="left" class="listtd"><a href="javascript:fn_egov_select('<c:out value="${result.bbrdTtl}"/>')"><c:out value="${result.bbrdTtl}"/></a></td>
+            				<td align="left" class="listtd"><a href="javascript:fn_egov_select('<c:out value="${result.bbrdLst}"/>')"><c:out value="${result.bbrdTtl}"/></a></td>
             				<td align="left" class="listtd"><c:out value="${result.bbrdWrDate}"/>&nbsp;</td>
             				<td align="center" class="listtd"><c:out value="${result.bbrdVew}"/>&nbsp;</td>
             			</tr>

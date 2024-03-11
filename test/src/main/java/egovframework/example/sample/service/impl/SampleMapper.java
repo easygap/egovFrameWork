@@ -70,7 +70,15 @@ public interface SampleMapper {
 	 * @return 조회한 글
 	 * @exception Exception
 	 */
-	SampleVO selectSample(SampleVO vo) throws Exception;
+	SampleVO boardView(SampleVO vo) throws Exception;
+	
+	/**
+	 * 조회한 글의 조회수 +1.
+	 * @param vo - 조회할 정보가 담긴 SampleVO
+	 * @return 조회한 글
+	 * @exception Exception
+	 */
+	void increaseView(int lst)throws Exception;
 
 	/**
 	 * 글 목록을 조회한다.
@@ -86,6 +94,13 @@ public interface SampleMapper {
 	 * @return 글 총 갯수
 	 * @exception
 	 */
-	int selectCount(SampleDefaultVO searchVO);
+	int selectCount(SampleDefaultVO searchVO) throws Exception;
 
+	/**
+	 * 글의 비밀번호를 검증한다.
+	 * @param searchVO - 조회할 정보가 담긴 VO
+	 * @return 글 총 갯수
+	 * @exception
+	 */
+	int checkPassword(SampleVO vo) throws Exception;
 }

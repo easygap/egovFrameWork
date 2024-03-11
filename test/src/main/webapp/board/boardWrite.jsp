@@ -18,7 +18,7 @@ function validateForm() {
 
     var nmCheck = /^[a-zA-Z0-9가-힣]{1,30}$/;
     var ttlCheck = /^[a-zA-Z0-9가-힣!@#$%^&*()\s]{1,30}$/;
-    var cntnsCheck = /^[a-zA-Z0-9가-힣!@#$%^&*()\s]{1,1000}$/;
+    var cntnsCheck = /^[a-zA-Z0-9가-힣!@#$%^&*()\s\n]{1,1000}$/;
     var pwdCheck = /^(?=.*[!@#$%^&*()])[a-zA-Z0-9가-힣!@#$%^&*()]{1,30}$/;
 
     // 폼 요소가 정상적으로 가져와졌는지 확인
