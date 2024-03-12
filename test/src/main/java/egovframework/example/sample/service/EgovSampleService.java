@@ -17,6 +17,8 @@ package egovframework.example.sample.service;
 
 import java.util.List;
 
+import egovframework.rte.psl.dataaccess.util.EgovMap;
+
 /**
  * @Class Name : EgovSampleService.java
  * @Description : EgovSampleService Class
@@ -41,7 +43,7 @@ public interface EgovSampleService {
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	List<?> selectList(SampleDefaultVO searchVO) throws Exception;
+	List<EgovMap> selectList(SampleDefaultVO searchVO) throws Exception;
 
 	/**
 	 * 글 총 갯수를 조회한다.
@@ -69,11 +71,11 @@ public interface EgovSampleService {
 	
 	/**
 	 * 조회한 글의 조회수 +1.
-	 * @param lst - 게시글의 번호
+	 * @param num - 게시글의 번호
 	 * @return 조회수 증가 결과
 	 * @exception Exception
 	 */
-	void increaseView(int lst) throws Exception;
+	void increaseView(int num) throws Exception;
 	
 	/**
 	 * 글의 비밀번호 검증.
@@ -82,4 +84,20 @@ public interface EgovSampleService {
 	 * @exception Exception
 	 */
 	int checkPassword(SampleVO vo) throws Exception;
+	
+	/**
+	 * 글을 삭제한다.
+	 * @param num - 게시글 번호
+	 * @return void형
+	 * @exception
+	 */
+	void boardDelete(int num) throws Exception;
+	
+	/**
+	 * 글을 수정한다.
+	 * @param vo - 수정할 정보가 담긴 SampleVO
+	 * @return void형
+	 * @exception Exception
+	 */
+	void boardEdit(SampleVO vo) throws Exception;
 }

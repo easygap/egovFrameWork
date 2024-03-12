@@ -3,6 +3,13 @@
 <%@ taglib prefix="form"      uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
 <%@ taglib prefix="spring"    uri="http://www.springframework.org/tags"%>
+<%
+  /**
+  * Description : 게시글 상세보기
+  * 작성일 : 2024.03.11
+  * 작성자 : ljs
+  */
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <head>
@@ -77,8 +84,8 @@
 	                "password" : password
 	            },
 	            success: function(data) {
-	                let url = '../board/edit?lst=${param.num}'
-	                if (data === 0) {    //비밀번호 불일치
+	                let url = '../board/selectBoardEdit.do?num=${sampleVO.num}'
+	                if (data == 0) {    //비밀번호 불일치
 	                    console.log("check의 값은 : " + data);
 	                    alert("비밀번호 불일치!"); 
 	                } else {    //비밀번호 일치
@@ -101,23 +108,21 @@
         password = prompt("게시글 삭제를 위한 비밀번호를 입력하세요.");
         if (password != null) {
             $.ajax({
+            	anyne:true,
                 type: 'post',
                 url: 'http://localhost:8080/test/board/checkPassword.do',
                 dataType: 'text',
                 data: {
-                    lst: lst,
-                    ttl: ttl,
-                    cntns: cntns,
-                    pwd: password
+                	"num" : num,
+	                "password" : password
                 },
-                success: function(data, textStatus) {
-                	var responseData = JSON.parse(data); // JSON 문자열을 객체로 변환
-                	let url = '../board/delete?num=${param.num}'
-                    if (responseData.check === 0) {    //비밀번호 불일치
-                        console.log("check의 값은 : " + responseData.check);
+                success: function(data) {
+                	let url = '../board/boardDelete.do?num=${sampleVO.num}'
+                    if (data == 0) {    //비밀번호 불일치
+                        console.log("check의 값은 : " + data);
                         alert("비밀번호 불일치!"); 
                     } else {    //비밀번호 일치
-                    	console.log("check의 값은 : " + responseData.check);
+                    	console.log("check의 값은 : " + data);
                     	if (confirm("정말 삭제하시겠습니까?") == true) {    //비밀번호 일치 시 게시글 삭제 여부 확인
                     		location.replace(url);
                             } else {

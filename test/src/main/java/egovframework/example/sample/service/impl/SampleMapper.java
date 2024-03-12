@@ -21,6 +21,7 @@ import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.example.sample.service.SampleVO;
 
 import egovframework.rte.psl.dataaccess.mapper.Mapper;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**
  * sample에 관한 데이터처리 매퍼 클래스
@@ -49,22 +50,6 @@ public interface SampleMapper {
 	void insertBoard (SampleVO vo) throws Exception;
 
 	/**
-	 * 글을 수정한다.
-	 * @param vo - 수정할 정보가 담긴 SampleVO
-	 * @return void형
-	 * @exception Exception
-	 */
-	void updateSample(SampleVO vo) throws Exception;
-
-	/**
-	 * 글을 삭제한다.
-	 * @param vo - 삭제할 정보가 담긴 SampleVO
-	 * @return void형
-	 * @exception Exception
-	 */
-	void deleteSample(SampleVO vo) throws Exception;
-
-	/**
 	 * 글을 조회한다.
 	 * @param vo - 조회할 정보가 담긴 SampleVO
 	 * @return 조회한 글
@@ -74,11 +59,11 @@ public interface SampleMapper {
 	
 	/**
 	 * 조회한 글의 조회수 +1.
-	 * @param vo - 조회할 정보가 담긴 SampleVO
+	 * @param num - 게시글 번호
 	 * @return 조회한 글
 	 * @exception Exception
 	 */
-	void increaseView(int lst)throws Exception;
+	void increaseView(int num)throws Exception;
 
 	/**
 	 * 글 목록을 조회한다.
@@ -86,7 +71,7 @@ public interface SampleMapper {
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	List<?> selectList(SampleDefaultVO searchVO) throws Exception;
+	List<EgovMap> selectList(SampleDefaultVO searchVO) throws Exception;
 
 	/**
 	 * 글 총 갯수를 조회한다.
@@ -103,4 +88,20 @@ public interface SampleMapper {
 	 * @exception
 	 */
 	int checkPassword(SampleVO vo) throws Exception;
+	
+	/**
+	 * 글을 삭제한다.
+	 * @param num - 게시글 번호
+	 * @return void형
+	 * @exception
+	 */
+	void boardDelete(int num)throws Exception;
+
+	/**
+	 * 글을 수정한다.
+	 * @param vo - 수정할 정보가 담긴 SampleVO
+	 * @return void형
+	 * @exception
+	 */ 
+	void boardEdit(SampleVO vo)throws Exception;
 }

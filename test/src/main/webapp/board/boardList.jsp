@@ -5,18 +5,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%
   /**
-  * @Class Name : egovSampleList.jsp
-  * @Description : Sample List 화면
-  * @Modification Information
-  *
-  *   수정일         수정자                   수정내용
-  *  -------    --------    ---------------------------
-  *  2009.02.01            최초 생성
-  *
-  * author 실행환경 개발팀
-  * since 2009.02.01
-  *
-  * Copyright (C) 2009 by MOPAS  All right reserved.
+  * Description : 게시글 리스트
+  * 작성일 : 2024.03.06
+  * 작성자 : ljs
   */
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -118,7 +109,7 @@
 			                <form:input path="searchKeyword" cssClass="txt"/>
 			            </td>
 			            <td>
-			                <button type="button" class="searchB" onclick="fn_egov_selectList();"><spring:message code="button.search" /></button>
+			                <button type="submit" class="searchB"><spring:message code="button.search" /></button>
 			            </td>
 			        </tr>
 			    </table>

@@ -81,14 +81,28 @@
 	<update id="increaseView">
 			UPDATE BBRD
 			SET BBRD_VEW = BBRD_VEW + 1
-			WHERE BBRD_LST=#{lst}
+			WHERE BBRD_LST=#{num}
 	</update>
 	
-	<select id="checkPassword" resultMap="board">
+	<select id="checkPassword" parameterType="SampleVO" resultType="int">
 			SELECT COUNT(*)
 			FROM BBRD
 			WHERE BBRD_LST = #{num} AND
 				  BBRD_PWD = #{password}
 	</select>
+	
+	<update id="boardDelete">
+			UPDATE BBRD
+			SET BBRD_YN = 'N'
+			WHERE BBRD_LST=#{num}
+	</update>
 
+	<update id="boardEdit">
+			UPDATE BBRD
+			SET BBRD_TTL = #{title},
+				BBRD_CNTNS = #{contents},
+				BBRD_PWD = #{password}
+			WHERE BBRD_LST=#{num}
+	</update>
+	
 </mapper>

@@ -21,6 +21,7 @@ import egovframework.example.sample.service.EgovSampleService;
 import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.example.sample.service.SampleVO;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 import javax.annotation.Resource;
 
@@ -61,7 +62,7 @@ public class EgovSampleServiceImpl extends EgovAbstractServiceImpl implements Eg
 	 * @exception Exception
 	 */
 	@Override
-	public List<?> selectList(SampleDefaultVO searchVO) throws Exception {
+	public List<EgovMap> selectList(SampleDefaultVO searchVO) throws Exception {
 		return sampleDAO.selectList(searchVO);
 	}
 
@@ -108,13 +109,13 @@ public class EgovSampleServiceImpl extends EgovAbstractServiceImpl implements Eg
 
 	/**
 	 * 조회한 글의 조회수 +1.
-	 * @param vo - 조회할 정보가 담긴 SampleVO
+	 * @param num - 게시글 번호
 	 * @return 조회한 글
 	 * @exception Exception
 	 */
 	@Override
-	public void increaseView(int lst) throws Exception {
-		sampleDAO.increaseView(lst);
+	public void increaseView(int num) throws Exception {
+		sampleDAO.increaseView(num);
 	}
 
 	/**
@@ -128,7 +129,31 @@ public class EgovSampleServiceImpl extends EgovAbstractServiceImpl implements Eg
 		//SHA-256암호화
 		Encryption encryption = new Encryption();
 		vo.setPassword(encryption.encrypt(vo.getPassword()));
+		LOGGER.debug("Impl에서 password의 값은? : " + vo.getPassword());
+
 		return sampleDAO.checkPassword(vo);
 	}
 
+	/**
+	 * 글을 삭제한다.
+	 * @param num - 삭제할 게시글 번호
+	 * @return 삭제 결과
+	 * @exception Exception
+	 */
+	public void boardDelete(int num) throws Exception {
+		sampleDAO.boardDelete(num);
+	}
+	
+	/**
+	 * 글을 수정한다.
+	 * @param vo - 수정할 정보가 담긴 SampleVO
+	 * @return void형
+	 * @exception Exception
+	 */
+	public void boardEdit(SampleVO vo) throws Exception {
+		//SHA-256암호화
+		Encryption encryption = new Encryption();
+		vo.setPassword(encryption.encrypt(vo.getPassword()));
+		sampleDAO.boardEdit(vo);
+	}
 }

@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+  /**
+  * Description : 상단 네비게이션 바
+  * 작성일 : 2024.03.05
+  * 작성자 : ljs
+  */
+%>
 <!DOCTYPE html>
 <html>
     <head>
